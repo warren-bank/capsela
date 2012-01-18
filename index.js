@@ -32,7 +32,7 @@ var modules = ['Server', 'Stage', 'Request', 'Response',
     'JsonResponse', 'BlobResponse', 'ViewResponse',
     'ClientResponse', 'Resolver',
      'Route', 'HttpClient', 'Browser', 'Cookie', 'Form',
-    'Session', 'SessionStore', 'View', 'ViewRegistry', 'Error'];
+    'Session', 'SessionStore', 'View', 'ViewRegistry'];
 
 function loadModule(name) {
     var module = require(__dirname + '/lib/' + name);
@@ -46,6 +46,26 @@ modules.forEach(loadModule);
 
 exports.stages = require(__dirname + '/lib/stages');
 exports.views = require(__dirname + '/lib/views');
+
+// set up our http-status-code-aware-error constructor
+exports.Error = function(message, code, err) {
+
+    // create the error object
+    this.error = new Error(message);
+
+    // copy its various parts
+    this.message = message;
+
+    // drop the unhelpful stack frame for this function
+    var trace = this.error.stack.split('\n');
+    trace.splice(1, 1);
+    
+    this.stack = trace.join('\n');
+    
+    // add some more
+    this.code = code || 500;
+    this.antecedent = err;
+};
 
 /**
  * Set up getters for the "rigs" and "probes" namespaces so the
