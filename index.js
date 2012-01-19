@@ -27,8 +27,8 @@
 "use strict";
 /*global require: false, __dirname: false, global: false, process: false, exports: true, Buffer: false, module: false, setInterval: true */
 
-var modules = ['Server', 'Stage', 'Request', 'Response',
-    'Redirect', 'FileResponse', //'Service', 'App',
+var modules = ['App', 'Server', 'Stage', 'Request', 'Response',
+    'Redirect', 'FileResponse', //'Service',
     'JsonResponse', 'BlobResponse', 'ViewResponse',
     'ClientResponse', 'Resolver',
      'Route', 'HttpClient', 'Browser', 'Cookie', 'Form',
