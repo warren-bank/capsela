@@ -161,6 +161,20 @@ exports["basics"] = {
                 test.equal(response, 'ok');
                 test.done();
             });
+    },
+
+    "test directory listing denied": function(test) {
+
+        var fileServer = new FileServer("/", testbench.fixturesDir + '/fileserver');
+        var request = new Request('GET', '/scripts');
+
+        Q.when(fileServer.service(request),
+            null,
+            function(err) {
+                test.equal(err.message, "directory listing denied");
+                test.equal(err.code, 403);
+                test.done();
+            });
     }
 }
 
