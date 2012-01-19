@@ -29,25 +29,42 @@
 var testbench = require(__dirname + '/../TestBench');
 
 var capsela = require('capsela');
-
-var TestView = capsela.View.extend({
-},
-{
-    render: function() {
-        return 'hi there!';
-    }
-});
+var View = capsela.View;
 
 module.exports["basics"] = {
 
-    "test isComplete": function(test) {
-        test.ok(new TestView().isComplete());
+    "test init/isComplete": function(test) {
+
+        var view = new View('xyz');
+        test.equal(view.isComplete(), false);
+
+        view = new View('hithere! <!DOCTYPE html>');
+        test.equal(view.isComplete(), false);
+
+        view = new View('hithere! <!doctype html>');
+        test.equal(view.isComplete(), false);
+
+        view = new View('<html></html>');
+        test.equal(view.isComplete(), true);
+
+        view = new View('<!DOCTYPE html>');
+        test.equal(view.isComplete(), true);
+
+        test.done();
+    },
+
+    "test render": function(test) {
+
+        var view = new View('hi there!');
+
+        test.equal(view.render(), "hi there!");
+
         test.done();
     },
 
     "test set/get parent": function(test) {
 
-        var view = new TestView();
+        var view = new View();
 
         test.equal(view.getParent(), undefined);
         test.equal(view.setParent('sal'), view); // test fluency
