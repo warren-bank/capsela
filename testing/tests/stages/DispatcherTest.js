@@ -295,6 +295,27 @@ module.exports["dispatching"] = {
         ).end();
     },
 
+    "test dispatch with querystring": function(test) {
+
+        var d = new Dispatcher();
+
+        d.addController({
+            defaultAction: function(request) {
+                test.deepEqual(request.params, {
+                    'cache': 'off',
+                    'key': 'perturbations'
+                });
+                return 'ok';
+            }
+        }, 'page');
+
+        Q.when(d.service(new capsela.Request('get', '/page/cache/off?key=perturbations')),
+            function(response) {
+                test.equal(response, 'ok');
+                test.done();
+            }).end();
+    },
+
     "test dispatch success": function(test) {
 
         var d = new Dispatcher();
