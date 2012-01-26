@@ -30,6 +30,7 @@ var capsela = require('capsela');
 var App = capsela.App;
 var mp = require('capsela-util').MonkeyPatcher;
 var Log = require('capsela-util').Log;
+var Q = require('q');
 
 exports.basics = {
 
@@ -38,7 +39,7 @@ exports.basics = {
     
     "test init": function(test) {
 
-        test.expect(3);
+        test.expect(4);
 
         var gecb;
         
@@ -50,8 +51,10 @@ exports.basics = {
         var app = new App();
         var err = new Error("Oh God, no!");
 
-        // patch the log
-        app.log.log = function(priority, message) {
+        test.equal(app.mode, 'testing');
+
+        // patch the logger
+        app.log = function(priority, message) {
             test.equal(priority, Log.ERROR);
             test.equal(message, 'UNCAUGHT EXCEPTION: ' + err + '\n' + err.stack);
         };
@@ -60,5 +63,48 @@ exports.basics = {
         gecb(err);
 
         test.done();
+    },
+
+    "test addService/start/stop": function(test) {
+
+        test.expect(4);
+
+        var started = false;
+        var stopped = false;
+        
+        var app = new App('development');
+
+        test.equal(app.mode, 'development');
+
+        app.addService('database',
+            function() {
+                started = true;
+
+                return Q.delay('ok', 10);
+            },
+            function() {
+
+                stopped = true;
+
+                return Q.delay('ok', 10);
+            });
+
+        app.on('log', function(priority, message) {
+            test.equal(priority, Log.INFO);
+        });
+
+        app.start().then(
+            function() {
+                
+                test.ok(started);
+                return app.stop();
+            }
+        ).then(
+            function() {
+                
+                test.ok(stopped);
+                test.done();
+            }
+        ).end();
     }
 }
