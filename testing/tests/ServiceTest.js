@@ -72,5 +72,14 @@ exports.basics = {
                 test.done();
             }
         ).end();
+    },
+
+    "test start/stop w/out functions": function(test) {
+
+        var service = new Service('testing');
+
+        return Q.when(service.start(), function() {
+            return service.stop();
+        });
     }
 };

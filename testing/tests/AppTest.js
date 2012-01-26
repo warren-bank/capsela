@@ -106,5 +106,54 @@ exports.basics = {
                 test.done();
             }
         ).end();
+    },
+
+    "test start w/error": function(test) {
+
+        test.expect(2);
+
+        var started = false;
+        var stopped = false;
+
+        var app = new App();
+
+        app.addService('dummy', function() {
+            throw new Error("oh no!");
+        });
+
+        app.on('log', function(priority, message) {
+            test.equal(priority, Log.INFO);
+        });
+
+        app.start().then(null,
+            function(err) {
+                test.equal(err.message, "oh no!");
+                test.done();
+            }
+        );
+    },
+
+    "test addService w/out start/stop": function(test) {
+
+        test.expect(2);
+
+        var started = false;
+        var stopped = false;
+
+        var app = new App('development');
+
+        test.equal(app.mode, 'development');
+
+        app.addService('dummy');
+
+        app.on('log', function(priority, message) {
+            test.equal(priority, Log.INFO);
+        });
+
+        return app.start().then(
+            function() {
+                return app.stop();
+            }
+        );
     }
 }
