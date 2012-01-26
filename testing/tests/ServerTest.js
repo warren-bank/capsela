@@ -285,7 +285,7 @@ module.exports["construct/start"] = {
 
     "test start calls isReady": function(test) {
 
-        test.expect(3);
+        test.expect(4);
 
         // mock http
 
@@ -314,6 +314,7 @@ module.exports["construct/start"] = {
         };
 
         server.start().then(function() {
+            test.ok(server.isRunning());
             test.done();
         }).end();
     },
@@ -467,7 +468,7 @@ module.exports["construct/start"] = {
 
     "test stop": function(test) {
 
-        test.expect(3);
+        test.expect(4);
 
         var fakeServer = {
 
@@ -505,6 +506,7 @@ module.exports["construct/start"] = {
             }
         ).then(
             function() {
+                test.equal(server.isRunning(), false);
                 test.done();
             }).end();
     }
