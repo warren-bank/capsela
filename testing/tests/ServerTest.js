@@ -657,9 +657,10 @@ module.exports["request processing"] = {
 
         res.on('end', function() {
             test.equal(404, res.statusCode);
+            
             test.deepEqual(res.headers, {
                 'Content-Type': 'text/plain; charset=utf-8',
-                'Content-Length': '28',
+                'Content-Length': '9',
                 Date: nowUTC,
                 Server: 'Capsela'
             });
@@ -775,6 +776,41 @@ module.exports["request processing"] = {
 
         res.on('end', function() {
             test.equal(500, res.statusCode);
+            test.done();
+        });
+
+        server.handleRequest(req, res);
+    },
+
+    "test catches error in generating response body": function(test) {
+
+        test.expect(2);
+
+        var server = new Server();
+
+        var response = new capsela.Response();
+
+        var err = new Error("uh-oh!");
+
+        response.sendBody = function(stream) {
+            throw err;
+        };
+
+        server.addStage(function(request) {
+                return response;
+            });
+
+        var req = new mocks.Request();
+        var res = new mocks.Response();
+
+        server.on('log', function(p, m) {
+            if (p == Log.ERROR) {
+                test.equal(m, "error while streaming response body: " + err.stack);
+            }
+        });
+
+        res.on('end', function() {
+            test.equal(200, res.statusCode);
             test.done();
         });
 

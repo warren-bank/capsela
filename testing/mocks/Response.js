@@ -55,12 +55,6 @@ var MockResponse = Pipe.extend({
         this.headWritten = false;
 
         var t = this;
-
-        this.getData().then(
-            function(data) {
-                t.written = data;
-            }
-        );
     },
 
     ///////////////////////////////////////////////////////////////////////////////
