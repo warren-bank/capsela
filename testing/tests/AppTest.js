@@ -65,9 +65,87 @@ exports.basics = {
         test.done();
     },
 
+    "test non-running services not stopped": function(test) {
+
+        var service = new capsela.Service('database');
+
+        service.start = function() {
+//            this.running = true;
+            return Q.delay('ok', 10);
+        };
+
+        // should not be called
+        service.stop = function() {
+            test.ok(false);
+        };
+
+        var app = new App();
+
+        app.addService('database', service);
+
+        return app.start().then(
+            function() {
+                return app.stop();
+            }
+        );
+    },
+
+    "test add service object": function(test) {
+
+        test.expect(12);
+
+        var started = false;
+        var stopped = false;
+
+        var service = new capsela.Service('database');
+
+        service.start = function() {
+            started = true;
+            this.running = true;
+            this.log(Log.ALERT, 'uh-oh');
+            return Q.delay('ok', 10);
+        };
+
+        service.stop = function() {
+            stopped = true;
+            this.log(Log.WARNING, 'doggone');
+            return Q.delay('ok', 10);
+        };
+
+        var app = new App('development');
+
+        app.addService('database', service);
+
+        var expected = [
+            {p: Log.INFO, m: 'app starting in development mode'},
+            {p: Log.INFO, m: 'starting database'},
+            {p: Log.ALERT, m: 'uh-oh'},
+            {p: Log.INFO, m: 'stopping database'},
+            {p: Log.WARNING, m: 'doggone'}
+        ];
+
+        app.on('log', function(priority, message) {
+            var exp = expected.shift();
+            test.equal(priority, exp.p);
+            test.equal(message, exp.m);
+        });
+
+        app.start().then(
+            function() {
+                test.ok(started);
+                return app.stop();
+            }
+        ).then(
+            function() {
+                test.ok(stopped);
+                test.done();
+            }
+        ).end();
+    },
+
     "test addService/start/stop": function(test) {
 
-        test.expect(4);
+        test.expect(9);
 
         var started = false;
         var stopped = false;
@@ -89,8 +167,16 @@ exports.basics = {
                 return Q.delay('ok', 10);
             });
 
+        var expected = [
+            {p: Log.INFO, m: 'app starting in development mode'},
+            {p: Log.INFO, m: 'starting database'},
+            {p: Log.INFO, m: 'stopping database'}
+        ];
+
         app.on('log', function(priority, message) {
-            test.equal(priority, Log.INFO);
+            var exp = expected.shift();
+            test.equal(priority, exp.p);
+            test.equal(message, exp.m);
         });
 
         app.start().then(
@@ -110,7 +196,7 @@ exports.basics = {
 
     "test start w/error": function(test) {
 
-        test.expect(2);
+        test.expect(5);
 
         var started = false;
         var stopped = false;
@@ -119,10 +205,21 @@ exports.basics = {
 
         app.addService('dummy', function() {
             throw new Error("oh no!");
-        });
+        },
+            function() {
+                // should not run
+                test.ok(false);
+            });
+
+        var expected = [
+            {p: Log.INFO, m: 'app starting in testing mode'},
+            {p: Log.INFO, m: 'starting dummy'}
+        ];
 
         app.on('log', function(priority, message) {
-            test.equal(priority, Log.INFO);
+            var exp = expected.shift();
+            test.equal(priority, exp.p);
+            test.equal(message, exp.m);
         });
 
         app.start().then(null,
@@ -135,7 +232,7 @@ exports.basics = {
 
     "test addService w/out start/stop": function(test) {
 
-        test.expect(2);
+        test.expect(4);
 
         var started = false;
         var stopped = false;
