@@ -91,6 +91,13 @@ module.exports["basics"] = {
         test.equal(response.statusCode, 301);
         test.equal(response.getHeader('location'), 'https://www.example.com/');
 
+        // test preserves path
+        request = new capsela.Request('GET', '/stats?occupation=mentalist', {host: 'example.com'}, null, 'https');
+        response = stage.service(request);
+        test.ok(response instanceof capsela.Redirect);
+        test.equal(response.statusCode, 301);
+        test.equal(response.getHeader('location'), 'https://www.example.com/stats?occupation=mentalist');
+
         test.done();
     },
 
