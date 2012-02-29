@@ -101,6 +101,17 @@ module.exports["basics"] = {
         test.done();
     },
 
+    "test no redirect": function(test) {
+
+        var stage = new PreferredHost('www.example.com', 'http', true);
+        var request = new capsela.Request('GET', '/', {host: 'example.com'});
+
+        var response = stage.service(request);
+        test.ok(!(response instanceof capsela.Redirect));
+
+        test.done();
+    },
+
     "test favor http": function(test) {
 
         var stage = new PreferredHost('www.example.com', 'http');
