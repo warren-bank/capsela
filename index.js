@@ -29,7 +29,7 @@
 
 var modules = ['App', 'Server', 'Stage', 'Request', 'Response',
     'Redirect', 'FileResponse', 'Service',
-    'JsonResponse', 'BlobResponse', 'ViewResponse',
+    'JsonResponse', 'BlobResponse', 'ViewResponse', 'LayoutResponse',
     'ClientResponse', 'Resolver',
      'Route', 'HttpClient', 'Browser', 'Cookie', 'Form',
     'Session', 'SessionStore', 'View', 'ViewRegistry'];
