@@ -46,10 +46,10 @@
 
     "repository": {
         "type": "git",
-        "url": "git://github.com/Sitelier/capsela.git"
+        "url": "git://github.com/capsela/capsela.git"
     },
 
     "bugs": {
-        "url": "https://github.com/Sitelier/capsela/issues"
+        "url": "https://github.com/capsela/capsela/issues"
     }
 }
