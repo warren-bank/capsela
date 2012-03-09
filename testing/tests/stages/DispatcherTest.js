@@ -109,15 +109,16 @@ module.exports["basics"] = {
 
         var d = new Dispatcher();
 
-        var exp = ['default', 'test1'];
+        var loaded = {};
 
         d.loadController = function(baseDir, name) {
             test.equal(baseDir, testbench.fixturesDir + '/controllers');
-            test.equal(name, exp.shift());
+            loaded[name] = 1;
         };
 
         d.setUp(testbench.fixturesDir + '/controllers').then(
             function() {
+                test.deepEqual(loaded, {"test1": 1, "default": 1});
                 test.done();
             }
         ).end();
