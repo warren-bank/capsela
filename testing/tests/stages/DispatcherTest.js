@@ -54,11 +54,11 @@ module.exports["basics"] = {
 
         test.equal(d.getConfig(), config);
         
-        var loaded = {};
+        var loaded = {"test1": 0, "default": 0};
         
         d.loadController = function(baseDir, name) {
             test.equal(baseDir, testbench.fixturesDir + '/controllers');
-            loaded[name] = 1;
+            loaded[name] += 1;
         };
 
         Q.when(d.isReady(),
@@ -109,11 +109,11 @@ module.exports["basics"] = {
 
         var d = new Dispatcher();
 
-        var loaded = {};
+        var loaded = {"test1": 0, "default": 0};
 
         d.loadController = function(baseDir, name) {
             test.equal(baseDir, testbench.fixturesDir + '/controllers');
-            loaded[name] = 1;
+            loaded[name] += 1;
         };
 
         d.setUp(testbench.fixturesDir + '/controllers').then(
@@ -127,8 +127,6 @@ module.exports["basics"] = {
     "test setUp with load controller error": function(test) {
 
         var d = new Dispatcher();
-
-        var exp = ['default', 'test1'];
 
         d.loadController = function(baseDir, name) {
             throw new Error("in our bedroom after the war");
