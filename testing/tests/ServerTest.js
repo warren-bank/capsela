@@ -597,7 +597,7 @@ module.exports["form processing"] = {
                     test.equal(file.type, 'image/jpeg');
 
                     // make sure the path exists
-                    path.exists(file.path, function(exists) {
+                    fs.exists(file.path, function(exists) {
                         test.ok(exists);
 
                         // read the file that was received
