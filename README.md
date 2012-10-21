@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/capsela/capsela.png)](http://travis-ci.org/capsela/capsela)
 # Capsela
 
 A high-level, promises-based web framework for Node.js with an emphasis on testability.
