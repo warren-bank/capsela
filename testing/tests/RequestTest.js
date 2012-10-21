@@ -31,7 +31,7 @@ var querystring = require('querystring');
 var Pipe = require('capsela-util').Pipe;
 var fs = require('fs');
 
-var capsela = require('capsela');
+var capsela = require('../../');
 var Request = capsela.Request;
 var Form = capsela.Form;
 var Log = require('capsela-util').Log;

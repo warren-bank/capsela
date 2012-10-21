@@ -28,7 +28,7 @@
 
 var testbench = require('../TestBench');
 
-var Route = require('capsela').Route;
+var Route = require('../../').Route;
 
 var controller = {
 

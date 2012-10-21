@@ -28,10 +28,11 @@
 
 var TestBench = require('../TestBench');
 
-var Request = require('capsela').Request;
+var capsela = require('../../');
+var Request = capsela.Request;
 
-var HttpClient = require('capsela').HttpClient;
-var Response = require('capsela').Response;
+var HttpClient = capsela.HttpClient;
+var Response = capsela.Response;
 
 var http = require('http');
 var https = require('https');
@@ -353,7 +354,7 @@ module.exports["basics"] = {
                     request.bodyStream = {
                         end: function() {}
                     };
-                    return Q.ref(mockResponse);
+                    return Q.resolve(mockResponse);
                 }
             }
         };

@@ -28,7 +28,7 @@
 
 var testbench = require(__dirname + '/../TestBench');
 
-var JsonResponse = require('capsela').JsonResponse;
+var JsonResponse = require('../../').JsonResponse;
 var Pipe = require('capsela-util').Pipe;
 
 module.exports["basics"] = {

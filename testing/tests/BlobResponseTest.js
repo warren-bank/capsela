@@ -29,7 +29,7 @@
 var testbench = require(__dirname + '/../TestBench');
 var Pipe = require('capsela-util').Pipe;
 
-var BlobResponse = require('capsela').BlobResponse;
+var BlobResponse = require('../../').BlobResponse;
 
 module.exports["basics"] = {
 

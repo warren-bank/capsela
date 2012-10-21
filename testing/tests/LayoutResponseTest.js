@@ -31,8 +31,9 @@ var MonkeyPatcher = require('capsela-util').MonkeyPatcher;
 var Pipe = require('capsela-util').Pipe;
 var mp = new MonkeyPatcher();
 
-var View = require('capsela').View;
-var LayoutResponse = require('capsela').LayoutResponse;
+var capsela = require('../../');
+var View = capsela.View;
+var LayoutResponse = capsela.LayoutResponse;
 
 module.exports["basics"] = {
 

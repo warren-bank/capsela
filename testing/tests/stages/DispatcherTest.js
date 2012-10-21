@@ -10,7 +10,7 @@
 
 var testbench = require(__dirname + '/../../TestBench');
 
-var capsela = require('capsela');
+var capsela = require('../../../');
 var Dispatcher = capsela.stages.Dispatcher;
 var View = capsela.View;
 

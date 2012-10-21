@@ -30,7 +30,7 @@ var testbench = require('../TestBench');
 
 var fs = require('fs');
 
-var Response = require('capsela').Response;
+var Response = require('../../').Response;
 var Pipe = require('capsela-util').Pipe;
 
 module.exports["headers"] = {

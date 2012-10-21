@@ -28,7 +28,7 @@
 
 var testbench = require(__dirname + '/../TestBench');
 
-var capsela = require('capsela');
+var capsela = require('../../');
 var Stage = capsela.Stage;
 var Q = require('q');
 

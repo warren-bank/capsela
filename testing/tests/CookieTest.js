@@ -28,7 +28,7 @@
 
 var testbench = require(__dirname + '/../TestBench');
 
-var Cookie = require('capsela').Cookie;
+var Cookie = require('../../').Cookie;
 
 module.exports["parsing"] = {
 

@@ -33,7 +33,7 @@ var http = require('http');
 var https = require('https');
 var Pipe = require('capsela-util').Pipe;
 var Class = require('capsela-util').Class;
-var Server = require('capsela').Server;
+var Server = require('../../').Server;
 
 var orig = {
     httpRequest: http.request,

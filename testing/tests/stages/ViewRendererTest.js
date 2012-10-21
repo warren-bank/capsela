@@ -30,7 +30,7 @@ var testbench = require('../../TestBench');
 
 var fs = require('fs');
 
-var capsela = require('capsela');
+var capsela = require('../../../');
 var Response = capsela.Response;
 var Request = capsela.Request;
 var Stage = capsela.Stage;

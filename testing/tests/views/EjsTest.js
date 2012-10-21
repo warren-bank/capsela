@@ -26,7 +26,7 @@
 
 "use strict";
 
-var Ejs = require('capsela').views.Ejs;
+var Ejs = require('../../../').views.Ejs;
 
 module.exports["basics"] = {
 

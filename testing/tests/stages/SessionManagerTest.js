@@ -29,7 +29,7 @@
 
 var testbench = require('../../TestBench');
 
-var capsela = require('capsela');
+var capsela = require('../../../');
 var SessionManager = capsela.stages.SessionManager;
 var SessionStore = capsela.SessionStore;
 var Session = capsela.Session;
@@ -111,7 +111,7 @@ module.exports["establishing"] = {
 
             load: function(id) {
                 test.equal(id, 'the-xx');
-                return Q.ref(mockSession);
+                return Q.resolve(mockSession);
             }
         };
         
@@ -141,7 +141,7 @@ module.exports["establishing"] = {
 
             load: function(id) {
                 test.equal(id, 'the-xx');
-                return Q.ref(mockSession);
+                return Q.resolve(mockSession);
             }
         };
 
@@ -170,11 +170,11 @@ module.exports["servicing"] = {
 
             save: function(saved) {
                 test.equal(saved, session);
-                return Q.ref();
+                return Q.resolve();
             },
 
             load: function(sid) {
-                return Q.ref(session);
+                return Q.resolve(session);
             }
         };
 
@@ -211,12 +211,12 @@ module.exports["servicing"] = {
 
             save: function(saved) {
                 test.equal(saved, session);
-                return Q.ref();
+                return Q.resolve();
             },
 
             load: function(sid) {
                 test.equal(sid, session.getId());
-                return Q.ref(session);
+                return Q.resolve(session);
             }
         };
 
@@ -251,16 +251,16 @@ module.exports["servicing"] = {
 
             save: function(saved) {
                 test.equal(saved, session);
-                return Q.ref();
+                return Q.resolve();
             },
 
             load: function(sid) {
-                return Q.ref(session);
+                return Q.resolve(session);
             },
 
             destroy: function(destroyed) {
                 test.equal(destroyed, session);
-                return Q.ref();
+                return Q.resolve();
             }
         };
 
@@ -296,7 +296,7 @@ module.exports["servicing"] = {
         var response = new Response();
 
         sm.pass = function(request) {
-            return Q.ref(response);
+            return Q.resolve(response);
         };
 
         response.setHeader = function(name, value) {
@@ -317,7 +317,7 @@ module.exports["servicing"] = {
         var response = new Response();
 
         sm.pass = function(request) {
-            return Q.ref();
+            return Q.resolve();
         };
 
         var request = new Request();

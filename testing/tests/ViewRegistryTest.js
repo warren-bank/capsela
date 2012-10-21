@@ -26,7 +26,7 @@
 
 "use strict";
 
-var capsela = require('capsela');
+var capsela = require('../../');
 var ViewRegistry = capsela.ViewRegistry;
 var JsonTemplate = capsela.views.JsonTemplate;
 

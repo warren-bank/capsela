@@ -34,7 +34,7 @@ var fs = require('fs');
 var path = require('path');
 var StreamUtil = require('capsela-util').StreamUtil;
 
-var capsela = require('capsela');
+var capsela = require('../../');
 var Server = capsela.Server;
 var Response = capsela.Response;
 var Form = capsela.Form;
@@ -42,7 +42,7 @@ var Request = capsela.Request;
 var Log = require('capsela-util').Log;
 var Q = require('q');
 
-var mocks = require('capsela').mocks;
+var mocks = capsela.mocks;
 
 var MonkeyPatcher = require('capsela-util').MonkeyPatcher;
 
@@ -310,7 +310,7 @@ module.exports["construct/start"] = {
 
         server.isReady = function() {
             test.ok(true);
-            return Q.ref();
+            return Q.resolve();
         };
 
         server.start().then(function() {
@@ -706,7 +706,7 @@ module.exports["request processing"] = {
 
         server.addStage(
             function(request) {
-                return Q.ref().then(
+                return Q.resolve().then(
                     function() {
                         throw new Error("fool! you've killed us all!");
                     });

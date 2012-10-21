@@ -29,7 +29,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var capsela = require('capsela');
+var capsela = require('../../');
 var Browser = capsela.Browser;
 var HttpClient = capsela.HttpClient;
 var Request = capsela.Request;

@@ -28,7 +28,7 @@
 
 var testbench = require(__dirname + '/../TestBench');
 
-var capsela = require('capsela');
+var capsela = require('../../');
 var Form = capsela.Form;
 var Pipe = require('capsela-util').Pipe;
 var Request = capsela.Request;

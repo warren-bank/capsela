@@ -28,7 +28,7 @@
 
 var testbench = require(__dirname + '/../TestBench');
 
-var capsela = require('capsela');
+var capsela = require('../../');
 
 module.exports["basics"] = {
 

@@ -34,7 +34,7 @@ var qfs = require('q-fs');
 var mp = new MonkeyPatcher();
 var Q = require('q');
 
-var FileResponse = require('capsela').FileResponse;
+var FileResponse = require('../../').FileResponse;
 
 module.exports["basics"] = {
 
@@ -55,7 +55,7 @@ module.exports["basics"] = {
 
         mp.patch(qfs, 'stat', function(path) {
             test.equal(path, '/images/sunrise.jpg');
-            return Q.ref(stats);
+            return Q.resolve(stats);
         });
 
         FileResponse.create('/images/sunrise.jpg').then(null,
@@ -78,7 +78,7 @@ module.exports["basics"] = {
 
         mp.patch(qfs, 'stat', function(path) {
             test.equal(path, '/images/sunrise.jpg');
-            return Q.ref(stats);
+            return Q.resolve(stats);
         });
 
         FileResponse.create('/images/sunrise.jpg').then(
@@ -107,7 +107,7 @@ module.exports["basics"] = {
 
         mp.patch(qfs, 'stat', function(path) {
             test.equal(path, '/images/sunrise.jpg');
-            return Q.ref(stats);
+            return Q.resolve(stats);
         });
 
         mp.patch(fs, 'createReadStream', function(path) {

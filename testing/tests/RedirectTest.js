@@ -28,7 +28,7 @@
 
 var testbench = require(__dirname + '/../TestBench');
 
-var Redirect = require('capsela').Redirect;
+var Redirect = require('../../').Redirect;
 
 module.exports["basics"] = {
 

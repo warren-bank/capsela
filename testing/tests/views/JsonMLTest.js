@@ -28,7 +28,7 @@
 
 var testbench = require(__dirname + '/../../TestBench');
 
-var capsela = require('capsela');
+var capsela = require('../../../');
 var JsonML = capsela.views.JsonML;
 var mp = require('capsela-util').MonkeyPatcher;
 

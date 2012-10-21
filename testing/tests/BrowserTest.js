@@ -28,11 +28,12 @@
 
 var testbench = require(__dirname + '/../TestBench');
 
-var Browser = require('capsela').Browser;
-var Request = require('capsela').Request;
-var Response = require('capsela').Response;
-var HttpClientRig = require('capsela').rigs.HttpClientRig;
-var Stage = require('capsela').Stage;
+var capsela = require('../../');
+var Browser = capsela.Browser;
+var Request = capsela.Request;
+var Response = capsela.Response;
+var HttpClientRig = capsela.rigs.HttpClientRig;
+var Stage = capsela.Stage;
 
 module.exports["basics"] = {
 

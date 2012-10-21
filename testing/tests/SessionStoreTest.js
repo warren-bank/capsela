@@ -28,7 +28,7 @@
 
 var testbench = require('../TestBench');
 
-var capsela = require('capsela');
+var capsela = require('../../');
 
 var Session = capsela.Session;
 var SessionStore = capsela.SessionStore;
