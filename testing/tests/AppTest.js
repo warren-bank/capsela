@@ -26,7 +26,7 @@
 
 "use strict";
 
-var capsela = require('capsela');
+var capsela = require('../../');
 var App = capsela.App;
 var mp = require('capsela-util').MonkeyPatcher;
 var Log = require('capsela-util').Log;
