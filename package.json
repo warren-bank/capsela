@@ -21,7 +21,7 @@
     },
 
     "devDependencies": {
-        "testpilot": ">=0.2.2"
+        "testpilot": "git://github.com/capsela/testpilot.git"
     },
 
     "engines": {
