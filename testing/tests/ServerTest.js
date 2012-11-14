@@ -606,7 +606,9 @@ module.exports["form processing"] = {
                         // compare to file that was sent
                         var expected = fs.readFileSync(testbench.fixturesDir + '/form-data/chupacabra.jpg');
 
-                        test.ok(StreamUtil.equal(expected, fileContent), "received file doesn't match expected");
+                        StreamUtil.equal(expected, fileContent).then(function (equal) {
+                        	test.ok(equal, "received file doesn't match expected");
+                        });
                         d.resolve();
                     });
                 });
