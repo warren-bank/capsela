@@ -71,7 +71,7 @@ exports.basics = {
 
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test start/stop w/out functions": function(test) {

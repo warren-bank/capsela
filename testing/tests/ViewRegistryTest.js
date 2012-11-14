@@ -88,7 +88,7 @@ module.exports["basics"] = {
                 test.ok(vr.getView('user') instanceof JsonTemplate);
                 test.done();
             }
-        ).end();
+        ).done();
     }
 };
 

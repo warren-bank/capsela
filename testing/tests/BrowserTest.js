@@ -62,7 +62,7 @@ module.exports["basics"] = {
             function(response) {
                 test.done();
             }
-        ).end();
+        ).done();
 
         request.bodyStream.end();
     }

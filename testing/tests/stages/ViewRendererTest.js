@@ -115,7 +115,7 @@ module.exports["basics"] = {
                 test.ok(response instanceof ViewResponse);
                 test.equal(response.view, view);
                 test.done();
-            }).end();
+            }).done();
     },
 
     "test intercept viewResponse w/o view": function(test) {
@@ -138,7 +138,7 @@ module.exports["basics"] = {
                 test.equal(response, res);
                 test.equal(response.renderer, r);
                 test.done();
-            }).end();
+            }).done();
     }
 };
 

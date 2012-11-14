@@ -68,7 +68,7 @@ module.exports = {
                 test.equal(response.statusCode, 404);
                 test.equal(response.view, 'error');
                 test.done();
-            }).end();
+            }).done();
     },
 
     "test catch empty promise": function(test) {
@@ -87,7 +87,7 @@ module.exports = {
                 test.equal(response.statusCode, 404);
                 test.equal(response.view, 'error');
                 test.done();
-            }).end();
+            }).done();
     },
 
     "test catch thrown error": function(test) {
@@ -111,6 +111,6 @@ module.exports = {
                 });
                 test.equal(response.statusCode, 404);
                 test.done();
-            }).end();
+            }).done();
     }
 };

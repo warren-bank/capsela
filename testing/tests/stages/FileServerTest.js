@@ -143,7 +143,7 @@ exports["basics"] = {
                 test.equal(data.length, contentLength);
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test missing file falls through": function(test) {
@@ -228,7 +228,7 @@ exports["default file"] = {
                 test.equal(response, 'ok');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test default file option without trailing slash": function(test) {
@@ -253,7 +253,7 @@ exports["default file"] = {
                 test.ok(data.toString().indexOf('<p>chickens</p>') > 0);
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test default file option with trailing slash": function(test) {
@@ -278,7 +278,7 @@ exports["default file"] = {
                 test.ok(data.toString().indexOf('<p>chickens</p>') > 0);
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test default file in subdirectory": function(test) {
@@ -303,7 +303,7 @@ exports["default file"] = {
                 test.ok(data.toString().indexOf('font-family:') > 0);
                 test.done();
             }
-        ).end();
+        ).done();
     }
 }
 
@@ -347,7 +347,7 @@ exports["file types"] = {
                     test.equal(data.toString().indexOf('snow monkeys!'), 0);
                     test.done();
                 }
-            ).end();
+            ).done();
         });
     },
 
@@ -373,7 +373,7 @@ exports["file types"] = {
                     test.ok(data.toString().indexOf('<p>chickens</p>') > 0);
                     test.done();
                 }
-            ).end();
+            ).done();
         });
     },
 
@@ -399,7 +399,7 @@ exports["file types"] = {
                     test.ok(data.toString().indexOf('font-family:') > 0);
                     test.done();
                 }
-            ).end();
+            ).done();
         });
     },
 
@@ -425,7 +425,7 @@ exports["file types"] = {
                     test.ok(data.toString().indexOf('function() {') > 0);
                     test.done();
                 }
-            ).end();
+            ).done();
         });
     },
 
@@ -451,7 +451,7 @@ exports["file types"] = {
                     test.ok(data.toString().indexOf('function() {') > 0);
                     test.done();
                 }
-            ).end();
+            ).done();
         });
     },
 
@@ -471,7 +471,7 @@ exports["file types"] = {
                     test.equal(response.getHeader('Last-Modified'), stat.mtime.toUTCString());
                     test.done();
                 }
-            ).end();
+            ).done();
         });
     },
 
@@ -505,7 +505,7 @@ exports["file types"] = {
                 test.equal(response.getHeader('Expires'), new Date(now + 365 * 86400 * 1000).toUTCString());
                 test.equal(response.getHeader('Last-Modified'), stat.mtime.toUTCString());
                 test.done();
-            }).end();
+            }).done();
 
         });
     },
@@ -552,6 +552,6 @@ exports["file types"] = {
             function(response) {
                 test.equal(response.statusCode, 200);
                 test.done();
-        }).end();
+        }).done();
     }
 };
