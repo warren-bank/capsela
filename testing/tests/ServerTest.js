@@ -268,7 +268,7 @@ module.exports["construct/start"] = {
         server.isReady().then(function() {
             ready = true;
             test.done();
-        }).end();
+        }).done();
 
         setTimeout(function() {
             d[0].resolve();
@@ -316,7 +316,7 @@ module.exports["construct/start"] = {
         server.start().then(function() {
             test.ok(server.isRunning());
             test.done();
-        }).end();
+        }).done();
     },
 
     "test construct/start secure": function(test) {
@@ -359,7 +359,7 @@ module.exports["construct/start"] = {
 
         server.start().then(function() {
             fakeServer.onRequest(req, res);
-        }).end();
+        }).done();
     },
 
     "test construct/start secure with TLS-PSK connection": function(test) {
@@ -420,7 +420,7 @@ module.exports["construct/start"] = {
 
         server.start().then(function() {
             fakeServer.onRequest(req, res);
-        }).end();
+        }).done();
     },
 
     "test construct/start insecure": function(test) {
@@ -463,7 +463,7 @@ module.exports["construct/start"] = {
 
         server.start().then(function() {
             fakeServer.onRequest(req, res);
-        }).end();
+        }).done();
     },
 
     "test stop": function(test) {
@@ -508,7 +508,7 @@ module.exports["construct/start"] = {
             function() {
                 test.equal(server.isRunning(), false);
                 test.done();
-            }).end();
+            }).done();
     }
 };
 
@@ -606,8 +606,10 @@ module.exports["form processing"] = {
                         // compare to file that was sent
                         var expected = fs.readFileSync(testbench.fixturesDir + '/form-data/chupacabra.jpg');
 
-                        test.ok(StreamUtil.equal(expected, fileContent), "received file doesn't match expected");
-                        d.resolve();
+                        StreamUtil.equal(expected, fileContent).then(function (equal) {
+                        	test.ok(equal, "received file doesn't match expected");
+                            d.resolve();
+                        });
                     });
                 });
 

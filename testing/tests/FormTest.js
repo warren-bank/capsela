@@ -208,7 +208,7 @@ module.exports["basics"] = {
             function(data) {
                 test.done();
             }
-        ).end();
+        ).done();
 
         req.sendBody();
     },

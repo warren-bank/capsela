@@ -63,7 +63,7 @@ module.exports["basics"] = {
 
                 test.equal(err.message, "file not found or something, man");
                 test.done();
-            }).end();
+            }).done();
     },
 
     "test create success": function(test) {
@@ -89,7 +89,7 @@ module.exports["basics"] = {
                 test.equal(response.getLastModified().getTime(), 72000);
 
                 test.done();
-            }).end();
+            }).done();
     },
 
     "test write body": function(test) {
@@ -133,6 +133,6 @@ module.exports["basics"] = {
 
                 test.equal(data.toString(), 'oh my goodness!');
                 test.done();
-            }).end();
+            }).done();
     }
 };

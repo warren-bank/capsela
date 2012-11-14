@@ -140,7 +140,7 @@ exports.basics = {
                 test.ok(stopped);
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test addService/start/stop": function(test) {
@@ -191,7 +191,7 @@ exports.basics = {
                 test.ok(stopped);
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test start w/error": function(test) {

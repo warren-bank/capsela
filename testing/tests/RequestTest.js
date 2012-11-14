@@ -299,7 +299,7 @@ module.exports["basics"] = {
             function(obj) {
                 test.deepEqual(obj, bodyObj);
                 test.done();
-            }).end();
+            }).done();
 
         // stream the request body
         request.getBodyStream().end(JSON.stringify(bodyObj), 'utf8');
@@ -313,7 +313,7 @@ module.exports["basics"] = {
             function(err) {
                 test.equal(err.message, 'request body is not valid JSON');
                 test.done();
-            }).end();
+            }).done();
 
         // stream the request body
         request.getBodyStream().end('yo, what gives?', 'utf8');

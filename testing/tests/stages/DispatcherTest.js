@@ -65,7 +65,7 @@ module.exports["basics"] = {
             function() {
                 test.deepEqual(loaded, {"test1": 1, "default": 1});
                 test.done();
-            }).end();
+            }).done();
     },
 
     "test isReady": function(test) {
@@ -121,7 +121,7 @@ module.exports["basics"] = {
                 test.deepEqual(loaded, {"test1": 1, "default": 1});
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test setUp with load controller error": function(test) {
@@ -199,7 +199,7 @@ module.exports["resolving"] = {
 
                 test.done();
             }
-        ).end();
+        ).done();
     }
 };
 
@@ -220,7 +220,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'fell through');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test no action match": function(test) {
@@ -241,7 +241,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'fell through');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test default action match": function(test) {
@@ -258,7 +258,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'test1 default action called');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test dispatch null route": function(test) {
@@ -275,7 +275,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'default default action called');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test dispatch default controller": function(test) {
@@ -292,7 +292,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'default hitMe action called');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test dispatch with querystring": function(test) {
@@ -313,7 +313,7 @@ module.exports["dispatching"] = {
             function(response) {
                 test.equal(response, 'ok');
                 test.done();
-            }).end();
+            }).done();
     },
 
     "test dispatch success": function(test) {
@@ -330,7 +330,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'called edit!');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test infer default": function(test) {
@@ -354,7 +354,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'here i am!');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test dispatch with trailing slash": function(test) {
@@ -378,7 +378,7 @@ module.exports["dispatching"] = {
                 test.equal(result, 'here i am!');
                 test.done();
             }
-        ).end();
+        ).done();
     },
 
     "test no result falls through": function(test) {
@@ -407,6 +407,6 @@ module.exports["dispatching"] = {
                 test.equal(result, 'fell through');
                 test.done();
             }
-        ).end();
+        ).done();
     }
 };
