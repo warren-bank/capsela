@@ -608,8 +608,8 @@ module.exports["form processing"] = {
 
                         StreamUtil.equal(expected, fileContent).then(function (equal) {
                         	test.ok(equal, "received file doesn't match expected");
+                            d.resolve();
                         });
-                        d.resolve();
                     });
                 });
 
