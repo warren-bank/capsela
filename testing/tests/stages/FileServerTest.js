@@ -234,23 +234,14 @@ exports["default file"] = {
     "test default file option without trailing slash": function(test) {
 
         var fileServer = new FileServer("/resources", testbench.fixturesDir + '/fileserver', 'chickens.html');
-        var request = new Request('GET', '/resources');
+        var request = new Request('GET', '/resources', { Host: 'localhost:42' });
         var bodyBuffer = new Pipe(true);
         var contentLength;
 
         Q.when(fileServer.service(request),
             function(response) {
-                test.equal(response.statusCode, 200);
-                contentLength = response.getHeader('content-length');
-                test.equal(response.getHeader("Content-Type"), "text/html");
-                test.equal(response.getHeader('Expires'), new Date(now + 365 * 86400 * 1000).toUTCString());
-                response.sendBody(bodyBuffer);
-                return bodyBuffer.getData();
-            }
-        ).then(
-            function(data) {
-                test.equal(data.length, contentLength);
-                test.ok(data.toString().indexOf('<p>chickens</p>') > 0);
+                test.equal(response.statusCode, 301);
+                test.equal(response.getHeader('Location'), 'http://localhost:42/resources/');
                 test.done();
             }
         ).done();
@@ -284,7 +275,7 @@ exports["default file"] = {
     "test default file in subdirectory": function(test) {
 
         var fileServer = new FileServer("/", testbench.fixturesDir + '/fileserver', 'main.css');
-        var request = new Request('GET', '/styles');
+        var request = new Request('GET', '/styles/');
         var bodyBuffer = new Pipe(true);
         var contentLength;
 
