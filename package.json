@@ -15,7 +15,7 @@
     "dependencies": {
         "capsela-util": ">=0.1.0",
         "q": "~0.8",
-        "q-fs": ">=0.1.19",
+        "q-io": "~1.0.0",
         "formidable": ">=1.0.5",
         "jsdom": ">=0.2.0"
     },
