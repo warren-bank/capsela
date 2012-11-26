@@ -30,11 +30,22 @@ var testbench = require(__dirname + '/../TestBench');
 var MonkeyPatcher = require('capsela-util').MonkeyPatcher;
 var Pipe = require('capsela-util').Pipe;
 var fs = require('fs');
-var qfs = require('q-fs');
+var qfs = require('q-io/fs');
 var mp = new MonkeyPatcher();
 var Q = require('q');
 
 var FileResponse = require('../../').FileResponse;
+
+var fileStats = new qfs.Stats({
+    size: 527,
+    mtime: new Date(72000),
+    isFile: function() { return true; }
+});
+var dirStats = new qfs.Stats({
+    size: 527,
+    mtime: new Date(72000),
+    isFile: function() { return false; }
+});
 
 module.exports["basics"] = {
 
@@ -45,17 +56,10 @@ module.exports["basics"] = {
 
     "test create non-file": function(test) {
 
-        var stats = {
-            size: 527,
-            mtime: new Date(72000),
-            isFile: function() {
-                return false;
-            }
-        };
 
         mp.patch(qfs, 'stat', function(path) {
             test.equal(path, '/images/sunrise.jpg');
-            return Q.resolve(stats);
+            return Q.resolve(dirStats);
         });
 
         FileResponse.create('/images/sunrise.jpg').then(null,
@@ -68,17 +72,9 @@ module.exports["basics"] = {
 
     "test create success": function(test) {
         
-        var stats = {
-            size: 527,
-            mtime: new Date(72000),
-            isFile: function() {
-                return true;
-            }
-        };
-
         mp.patch(qfs, 'stat', function(path) {
             test.equal(path, '/images/sunrise.jpg');
-            return Q.resolve(stats);
+            return Q.resolve(fileStats);
         });
 
         FileResponse.create('/images/sunrise.jpg').then(
@@ -97,17 +93,9 @@ module.exports["basics"] = {
         var pipe = new Pipe();
         var bodyBuffer = new Pipe(true);
 
-        var stats = {
-            size: 527,
-            mtime: new Date(72000),
-            isFile: function() {
-                return true;
-            }
-        };
-
         mp.patch(qfs, 'stat', function(path) {
             test.equal(path, '/images/sunrise.jpg');
-            return Q.resolve(stats);
+            return Q.resolve(fileStats);
         });
 
         mp.patch(fs, 'createReadStream', function(path) {
