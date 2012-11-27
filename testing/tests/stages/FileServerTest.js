@@ -146,6 +146,31 @@ exports["basics"] = {
         ).done();
     },
 
+    "test URL with encoded spaces matches": function(test) {
+
+        var fileServer = new FileServer("/", testbench.fixturesDir + '/fileserver4');
+        var request = new Request('GET', "/i'm a dirname!/oh dear.html");
+        var bodyBuffer = new Pipe(true);
+        var contentLength;
+
+        Q.when(fileServer.service(request),
+            function(response) {
+                test.equal(response.statusCode, 200);
+                contentLength = response.getHeader('content-length');
+                test.equal(response.getHeader("Content-Type"), "text/html");
+                test.equal(response.getHeader('Expires'), new Date(now + 365 * 86400 * 1000).toUTCString());
+                response.sendBody(bodyBuffer);
+                return bodyBuffer.getData();
+            }
+        ).then(
+            function(data) {
+                test.ok(data.toString().indexOf('<p>chickens</p>') > 0);
+                test.equal(data.length, contentLength);
+                test.done();
+            }
+        ).done();
+    },
+
     "test missing file falls through": function(test) {
 
         var fileServer = new FileServer("/", testbench.fixturesDir + '/fileserver');
