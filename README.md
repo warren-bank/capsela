@@ -52,16 +52,18 @@ Promises make Node programming far less painful and error-prone, but there are a
 
 ## Example: a more useful app
 
-    var capsela = require('capsela');
+```js
+var capsela = require('capsela');
 
-    new capsela.Server()
-        .addStage(new capsela.stages.PreferredHost('www.capsela.org'))
-        .addStage(new capsela.stages.ViewRenderer(__dirname + '/views', capsela.views.JsonTemplate))
-        .addStage(new capsela.stages.ErrorHandler(errorTemplate))
-        .addStage(new capsela.stages.FileServer('/', __dirname + '/public'))
-        .addStage(new capsela.stages.SessionManager())
-        .addStage(new capsela.stages.Dispatcher(__dirname + '/controllers'))
-        .start();
+new capsela.Server()
+    .addStage(new capsela.stages.PreferredHost('www.capsela.org'))
+    .addStage(new capsela.stages.ViewRenderer(__dirname + '/views', capsela.views.JsonTemplate))
+    .addStage(new capsela.stages.ErrorHandler(errorTemplate))
+    .addStage(new capsela.stages.FileServer('/', __dirname + '/public'))
+    .addStage(new capsela.stages.SessionManager())
+    .addStage(new capsela.stages.Dispatcher(__dirname + '/controllers'))
+    .start();
+```
 
 As you'd expect, Capsela comes out of the box with several stages that provide solutions to common problems such as error handling, serving static files, managing sessions, and dispatching to MVC-style controllers.
 
@@ -69,24 +71,26 @@ A core requirement of Capsela is testability: unit and functional tests need to 
 
 ## Example: an end-to-end app test
 
-    var browser = new Browser();
+```js
+var browser = new Browser();
 
-    browser.get(appBaseUrl + '/login').then(
-        function() {
-            browser.fill('email', 'test@example.com');
-            browser.fill('password', 'password1');
+browser.get(appBaseUrl + '/login').then(
+    function() {
+        browser.fill('email', 'test@example.com');
+        browser.fill('password', 'password1');
 
-            return browser.pressButton('Sign in');
-        }
-    ).then(
-        function(response) {
+        return browser.pressButton('Sign in');
+    }
+).then(
+    function(response) {
 
-            var $ = browser.window.$;
+        var $ = browser.window.$;
 
-            test.equal(response.statusCode, 200);
-            test.ok($('.error').text().indexOf("Sorry, that password is incorrect.") >= 0);
-        }
-    ).end();
+        test.equal(response.statusCode, 200);
+        test.ok($('.error').text().indexOf("Sorry, that password is incorrect.") >= 0);
+    }
+).end();
+```
 
 You might have noticed that we're using jQuery in the assertions, which is a beautiful way of analyzing HTML responses; the browser window contains a full DOM implementation (courtesy of JSDOM). As you can see, the promise-based Browser class provides a powerful and natural testing style that lets you develop high-quality code with minimal effort. It can also be used for making assertions against JSON and binary responses, for loading and making assertions against HTML emails, or as a powerful page-scraper in your application proper.
 
