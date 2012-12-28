@@ -3,17 +3,17 @@
 
 A high-level, promises-based web framework for Node.js with an emphasis on testability.
 
+### To install:
+
+    npm install capsela
+
 ### To run the tests:
 
     testpilot testing/tests
 
-## Resources
----
-  - [Capsela.org](http://www.capsela.org)
-
 ## MIT License
 
-Copyright (c) 2011-2012 Sitelier Inc.
+Copyright (c) 2011-2012 by the Capsela contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

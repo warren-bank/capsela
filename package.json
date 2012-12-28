@@ -33,16 +33,8 @@
     },
 
     "author": {
-        "name": "Seth Purcell",
-        "email": "seth.purcell@sitelier.com"
+        "name": "Seth Purcell"
     },
-
-    "contributors": [
-        {
-            "name": "Chris Osborn",
-            "email": "chris.osborn@sitelier.com"
-        }
-    ],
 
     "repository": {
         "type": "git",
