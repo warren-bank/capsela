@@ -36,16 +36,23 @@ var Q = require('q');
 
 var FileResponse = require('../../').FileResponse;
 
-var fileStats = new qfs.Stats({
+var fileStats = {
     size: 527,
-    mtime: new Date(72000),
     isFile: function() { return true; }
-});
-var dirStats = new qfs.Stats({
+};
+
+fileStats.lastModified = function () {
+    return new Date(72000);
+};
+
+var dirStats = {
     size: 527,
-    mtime: new Date(72000),
     isFile: function() { return false; }
-});
+};
+
+dirStats.lastModified = function () {
+    return new Date(72000);
+};
 
 module.exports["basics"] = {
 
